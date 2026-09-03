@@ -1,0 +1,9 @@
+vendor_name = ModelSim
+source_file = 1, C:/Users/nicof/Documents/Electronica_digital/Laboratorio_2/Ejercicio1/Ejercicio1.v
+source_file = 1, C:/Users/nicof/Documents/Electronica_digital/Laboratorio_2/Ejercicio1/db/Ejercicio1.cbx.xml
+design_name = Ejercicio1
+instance = comp, \oY~output , oY~output, Ejercicio1, 1
+instance = comp, \iEntrada[1]~input , iEntrada[1]~input, Ejercicio1, 1
+instance = comp, \iEntrada[0]~input , iEntrada[0]~input, Ejercicio1, 1
+instance = comp, \iEntrada[2]~input , iEntrada[2]~input, Ejercicio1, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, Ejercicio1, 1
