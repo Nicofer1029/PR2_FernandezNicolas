@@ -1,0 +1,74 @@
+// ============================================================
+// Ejercicio 12 - Aplicación de circuitos combinacionales (I)
+// Grupo (último dígito ID = 3 o 4): código BCD 8-4-2-1
+//
+// - Entrada de 4 bits (valor 0 a 15)
+// - Si 0 <= entrada <= 9  -> Display 4 (HEX4) muestra el dígito
+//                            en BCD 8-4-2-1 (código estándar,
+//                            por eso no requiere conversión)
+// - Si entrada > 9        -> Display 6 (HEX5) muestra 'E' (error)
+//                            y Display 4 se apaga
+//
+// Descripción RTL (dataflow): todas las ecuaciones booleanas
+// fueron minimizadas por mapas de Karnaugh (verificadas con
+// álgebra booleana simbólica). NO se usan case/if de
+// comportamiento; solo asignaciones continuas (assign).
+// ============================================================
+
+module Ejercicio12(
+    input  [3:0] SW,     // SW[3]=A(MSB) SW[2]=B SW[1]=C SW[0]=D(LSB)
+    output [6:0] HEX4,   // Display 4: valor BCD 8-4-2-1 (activo en bajo)
+    output [6:0] HEX5    // Display 6: indicador de error 'E' (activo en bajo)
+);
+
+    // Renombrado de entradas para las ecuaciones de K-map
+    wire A = SW[3];
+    wire B = SW[2];
+    wire C = SW[1];
+    wire D = SW[0];
+
+    // -----------------------------------------------------------
+    // Detección de error: entrada > 9  (combinaciones 1010-1111)
+    // -----------------------------------------------------------
+    wire error;
+    assign error = A & (B | C);
+
+    // -----------------------------------------------------------
+    // Ecuaciones RTL de cada segmento (activo en alto),
+    // minimizadas con don't-care en las combinaciones 10-15
+    // -----------------------------------------------------------
+    wire seg_a, seg_b, seg_c, seg_d, seg_e, seg_f, seg_g;
+
+    assign seg_a = A | C | (B & D) | (~B & ~D);
+    assign seg_b = ~B | (C & D) | (~C & ~D);
+    assign seg_c = B | D | ~C;
+    assign seg_d = A | (C & ~B) | (C & ~D) | (~B & ~D) | (B & D & ~C);
+    assign seg_e = (C & ~D) | (~B & ~D);
+    assign seg_f = A | (B & ~C) | (B & ~D) | (~C & ~D);
+    assign seg_g = A | (B & ~C) | (C & ~B) | (C & ~D);
+
+    // -----------------------------------------------------------
+    // Display 4 (HEX4): dígito válido, apagado si hay error
+    // (salida activa en bajo -> se invierte cada segmento)
+    // -----------------------------------------------------------
+    assign HEX4[0] = ~(seg_a & ~error);
+    assign HEX4[1] = ~(seg_b & ~error);
+    assign HEX4[2] = ~(seg_c & ~error);
+    assign HEX4[3] = ~(seg_d & ~error);
+    assign HEX4[4] = ~(seg_e & ~error);
+    assign HEX4[5] = ~(seg_f & ~error);
+    assign HEX4[6] = ~(seg_g & ~error);
+
+    // -----------------------------------------------------------
+    // Display 6 (HEX5): letra 'E' solo si error=1, apagado si no.
+    // Patrón 'E' (activo alto): a=1 b=0 c=0 d=1 e=1 f=1 g=1
+    // -----------------------------------------------------------
+    assign HEX5[0] = ~error;   // a
+    assign HEX5[1] = 1'b1;     // b (siempre apagado en la 'E')
+    assign HEX5[2] = 1'b1;     // c (siempre apagado en la 'E')
+    assign HEX5[3] = ~error;   // d
+    assign HEX5[4] = ~error;   // e
+    assign HEX5[5] = ~error;   // f
+    assign HEX5[6] = ~error;   // g
+
+endmodule

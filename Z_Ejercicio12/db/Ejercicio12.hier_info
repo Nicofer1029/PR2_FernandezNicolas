@@ -1,0 +1,45 @@
+|Ejercicio12
+SW[0] => seg_b.IN0
+SW[0] => seg_c.IN0
+SW[0] => seg_d.IN0
+SW[0] => seg_g.IN0
+SW[0] => seg_f.IN0
+SW[0] => seg_f.IN0
+SW[0] => seg_e.IN0
+SW[1] => error.IN0
+SW[1] => seg_a.IN0
+SW[1] => seg_b.IN1
+SW[1] => seg_g.IN0
+SW[1] => seg_g.IN1
+SW[1] => seg_g.IN0
+SW[1] => seg_f.IN1
+SW[1] => seg_d.IN1
+SW[1] => seg_c.IN1
+SW[2] => error.IN1
+SW[2] => seg_c.IN1
+SW[2] => seg_d.IN1
+SW[2] => seg_f.IN1
+SW[2] => seg_g.IN1
+SW[2] => seg_g.IN1
+SW[2] => seg_e.IN1
+SW[2] => seg_b.IN1
+SW[3] => error.IN1
+SW[3] => seg_a.IN1
+SW[3] => seg_d.IN1
+SW[3] => seg_g.IN1
+HEX3[0] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[1] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[2] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[3] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[4] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[5] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX3[6] <= HEX3.DB_MAX_OUTPUT_PORT_TYPE
+HEX5[0] <= error.DB_MAX_OUTPUT_PORT_TYPE
+HEX5[1] <= <VCC>
+HEX5[2] <= <VCC>
+HEX5[3] <= error.DB_MAX_OUTPUT_PORT_TYPE
+HEX5[4] <= error.DB_MAX_OUTPUT_PORT_TYPE
+HEX5[5] <= error.DB_MAX_OUTPUT_PORT_TYPE
+HEX5[6] <= error.DB_MAX_OUTPUT_PORT_TYPE
+
+
